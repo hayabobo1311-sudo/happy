@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Loreyn 💘</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Gochi Hand', cursive;
+  background: linear-gradient(-45deg, #ff8fb1, #ff4f81, #ff6f91, #ff9a9e);
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.container {
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 28px;
+  color: white;
+  margin-bottom: 20px;
+  transition: opacity 0.3s ease;
+}
+
+img {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  transition: opacity 0.25s ease;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+button {
+  padding: 14px;
+  font-size: 18px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.yes-btn {
+  background: white;
+  color: #ff4f81;
+}
+
+.no-btn {
+  background: #ffe0ea;
+  color: #ff4f81;
+}
+
+.subtext {
+  margin-top: 10px;
+  font-size: 18px;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1 id="mainText">
+    will u be my valentine loreyn my pookie wookie??? 🥹❤️
+  </h1>
+
+  <img id="mainImage" src="pic1.jpg" alt="pic">
+
+  <div class="buttons" id="buttons">
+    <button class="yes-btn" id="yesBtn">yes baby ofc</button>
+    <button class="no-btn" id="noBtn">pass kosa</button>
+  </div>
+
+  <div class="subtext" id="subText">(bembang ka sakin)</div>
+
+  <audio id="bgMusic" src="music.mp3"></audio>
+</div>
+
+<script>
+let stage = 0;
+let opacityLevel = 1;
+
+const textStages = [
+  "ay bakit? 🥹",
+  "nasasaktan nako ah 😭",
+  "sige isa 🥺",
+  "wala kang choice 😌",
+  "wala kang choice 😌"
+];
+
+const noButtonTexts = [
+  "yoko e",
+  "pake ko sayo",
+  "bahala ka dyan"
+];
+
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const mainText = document.getElementById("mainText");
+const mainImage = document.getElementById("mainImage");
+const buttons = document.getElementById("buttons");
+const subText = document.getElementById("subText");
+const music = document.getElementById("bgMusic");
+
+noBtn.addEventListener("click", function() {
+
+  stage++;
+
+  // Change text
+  if (stage <= textStages.length) {
+    mainText.textContent = textStages[stage - 1];
+  }
+
+  // Image progression
+  if (stage === 1) fadeImage("pic2.jpg");
+  if (stage === 2) fadeImage("pic3.jpg");
+  if (stage === 3) fadeImage("final.jpg");
+
+  // Change NO button text
+  if (stage <= noButtonTexts.length) {
+    noBtn.textContent = noButtonTexts[stage - 1];
+  }
+
+  // Fade NO button gradually over 5 clicks
+  opacityLevel -= 0.2;
+
+  if (opacityLevel <= 0) {
+    opacityLevel = 0;
+    noBtn.disabled = true;
+    noBtn.style.pointerEvents = "none";
+  }
+
+  noBtn.style.opacity = opacityLevel;
+});
+
+yesBtn.addEventListener("click", function() {
+
+  fadeImage("final2.gif");
+
+  mainText.textContent = "I LOVE YOUUUUUUU ❤️✨";
+  subText.style.opacity = 1;
+
+  buttons.style.display = "none";
+
+  music.play().catch(() => {});
+});
+
+function fadeImage(newSrc) {
+  mainImage.style.opacity = 0;
+  setTimeout(() => {
+    mainImage.src = newSrc;
+    mainImage.style.opacity = 1;
+  }, 250);
+}
+</script>
+
+</body>
+</html>
